@@ -3,8 +3,9 @@
 echo $this->extend('layout/master');
 
 echo $this->section("content");
+$nahodnyPojem
 ?>
-<form method="post" action="">
+<form method="post" action="zkouseni">
     <label for="kategorie">Vyberte kategorie:</label>
     <select name="kategorie[]" id="kategorie" class="form-control multiple-select" multiple>
         <?php foreach ($kategorie as $kategorieItem): ?>

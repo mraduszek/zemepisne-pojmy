@@ -7,39 +7,24 @@ echo $this->section("content");
 
 echo '<div class="container">';
 echo '<div class="row">';
-
-helper("form");
-
-echo form_open("uzivatel/podminky/novy");
-
 ?>
 
 <h1>Vytvoř skupinu zkoušení</h1><br>
-<label>Název skupiny</label><br>
-<input type="text" name="nazev"><br>
-<label>Pojmy</label>
-<select name="pojmy[]" class="form-control multiple-select" multiple>
-    <option value="0" disabled>--Vyber požadované pojmy--</option>
-    
+<form action="<?= base_url('skupiny/vlozeni/ulozit') ?>" method="post">
+    <label for="nazev">Název kategorie:</label>
+    <input type="text" name="nazev" id="nazev" required>
 
-    <?php 
-    foreach ($seznam as $row){
-        ?>
+    <label for="pojmy">Vyberte pojmy:</label>
+    <select name="pojmy[]" id="pojmy" class="form-control multiple-select" multiple>
+        <?php foreach ($pojmy as $pojem): ?>
+            <option value="<?= $pojem['idpojmy'] ?>"><?= $pojem['nazev'] ?></option>
+        <?php endforeach; ?>
+    </select>
 
-        <option value="<?php echo $row->idpojmy;?>"><?php echo $row->nazev;?></option><br>
-        <?php
-
-    }
-?>
-</select>
-
-<input class="btn btn-primary center" type="submit" name="vlozit" value="Přidat skupinu">
-
+    <button type="submit">Uložit</button>
+</form>
 
 <?php
-
-echo form_close();
-
 echo '</div>';
 echo '</div>';
 echo $this->endSection();

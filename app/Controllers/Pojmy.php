@@ -48,7 +48,6 @@ class Pojmy extends BaseController
             return redirect()->redirect(site_url("/uzivatel/pojmy"));
             }else{
        $data["title"] = "přidat pojmy";
-        //echo view('pridatUzivatele', $data);
    }
     }
 }

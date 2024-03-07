@@ -13,6 +13,7 @@ helper("form");
 echo form_open("uzivatel/pojmy/novy");
 
 ?>
+<div class="d-grid gap-2">
 <div id="form">
 
     <h1>Přidej pojem</h1><br>
@@ -36,7 +37,7 @@ echo form_open("uzivatel/pojmy/novy");
         </select>
     </div>
 </div>
-<button type="button" class="btn btn-primary" onclick="appendPolozka()">Přidat další</button><br>
+<button type="button" class="btn btn-lg btn-primary" onclick="appendPolozka()">Přidat další</button><br>
 
 
 <script>
@@ -63,6 +64,7 @@ echo form_open("uzivatel/pojmy/novy");
 
 
 <input class="btn btn-primary" type="submit" name="vlozit" value="Přidat pojem">
+</div>
 <?php
 //echo form_submit("vlozit", "Přidat pojem");
 

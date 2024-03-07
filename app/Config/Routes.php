@@ -25,10 +25,12 @@ $routes->get('uzivatel/kategorie/pridat', 'Kategorie::pridatKat');
 $routes->post('uzivatel/kategorie/novy', 'Kategorie::pridat');
 $routes->get('uzivatel/kategorie/(:num)', 'Kategorie::kategorie/$1');
 
-$routes->get('uzivatel/podminky', 'Podminky::get');
-$routes->get('uzivatel/podminky/pridat', 'Podminky::pridatPod');
-$routes->post('uzivatel/podminky/novy', 'Podminky::pridat');
+$routes->get('uzivatel/podminky/vytvorit', 'Podminky::vlozit');
+//$routes->get('uzivatel/podminky/pridat', 'Podminky::pridatPod');
+//$routes->post('uzivatel/podminky/novy', 'Podminky::pridat');
 
+$routes->get('skupiny/vlozeni', 'PodminkyVlozeni::index');
+$routes->post('skupiny/vlozeni/ulozit', 'PodminkyVlozeni::ulozit');
 
 
 
@@ -45,7 +47,7 @@ $routes->post('zkouseni', 'Zkouska::losuj/$1');
 //kategorie
 
 //přihlašování
-$routes->get('login', 'Dashboard::log'); //přejmenovat!!!
+//$routes->get('login', 'Dashboard::log'); //přejmenovat!!!
 
 
 
@@ -57,10 +59,20 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function($routes)
 
     $routes->get('kategorie', 'Admin::kategorie');
     $routes->post('schvalitVymazat2', 'Admin::schvalitVymazat2');
+
+    $routes->get('pojmy/upravit', 'Admin::upravit');
+    $routes->get('pojmy/upravit/(:num)', 'Admin::upravitPojem/$1');
+    $routes->put('pojmy/konecUprav', 'Admin::upravKonec');
+    $routes->get('pojmy/smazat/(:num)', 'Admin::deletePoj/$1');
+
+    $routes->get('kategorie/upravit', 'Admin::upravitKat');
+    $routes->get('kategorie/upravit/(:num)', 'Admin::upravitKategorii/$1');
+    $routes->put('kategorie/konecUprav', 'Admin::upravKonecKat');
+    $routes->get('kategorie/smazat/(:num)', 'Admin::deleteKat/$1');
 });
 
 $routes->get('admin/pojmy', 'Admin::pojmy');
-$routes->delete('admin/smazat/(:num)', 'Admin::form');
+
 
 
 

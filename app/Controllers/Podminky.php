@@ -2,30 +2,36 @@
 
 namespace App\Controllers;
 
-class Podminky extends BaseController
+use App\Models\KategorieZkouseniModel;
+use App\Models\PojmyModel;
+
+class VlozeniController extends BaseController
 {
-    function __construct(){
-        $this->model = new \App\Models\ModelPodminky;
-        $this->model2 = new \App\Models\ModelPojem;
+    public function vlozitData()
+    {
+        // Získání dat z formuláře
+        $nazevKategorie = $this->request->getPost('nazevKategorie');
+        $selectedPojmy = $this->request->getPost('selectedPojmy');
+
+        // Vložení dat do tabulky kategorieZkouseni
+        $kategorieModel = new KategorieZkouseniModel();
+        $kategorieData = ['nazev' => $nazevKategorie];
+        $kategorieModel->insert($kategorieData);
+
+        // Získání ID nově vložené kategorie
+        $idKategorie = $kategorieModel->getInsertID();
+
+        // Vložení dat do tabulky kategorie_has_pojmy
+        $kategoriePojmyModel = new KategoriePojmyModel();
+        foreach ($selectedPojmy as $idPojmu) {
+            $data = [
+                'idkategorieZkouseni' => $idKategorie,
+                'idpojmy' => $idPojmu,
+            ];
+            $kategoriePojmyModel->insert($data);
+        }
+
+        // Odeslání zpět na formulář nebo jiné vhodné místo
+        return redirect()->to('formular')->with('success', 'Data byla úspěšně vložena.');
     }
-
-
-    public function get(){
-        $data["seznam"] = $this->model->get();
-
-        return view('podminky', $data);
-    }
-
-    public function pridatPod(){
-        $data["seznam"] = $this->model2->get();
-
-        return view('pridatPod', $data);
-    }
-
-    public function pridat(){
-
-    }
-
-    
-    
 }
